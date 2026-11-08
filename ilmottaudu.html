@@ -27,7 +27,7 @@
         <p>Täytä alla oleva lomake, jos haluat
             osallistua ilmaiseen kokeiluharjoitukseen.</p>
 
-        <form>
+        <form id="ilmoittautumisLomake">
 
             <label for="nimi">Nimi:</label>
             <br>
@@ -58,11 +58,30 @@
             <button type="submit">>Lähetä ilmoittautuminen</button>
 
         </form>
+        <p id="onnistumisViesti" style="display: none;">
+        Ilmoittautuminen onnistui!
+        </p>
     </main>
 
     <footer>
         <p>Lapuan Lepakot ry</p>
     </footer>
+    <script>
 
+        const lomake = document.getElementById("ilmoittautumisLomake");
+
+        const viesti = document.getElementById("onnistumisViesti");
+
+        lomake.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        lomake.style.display = "none";
+
+        viesti.style.display = "block";
+
+    });
+
+</script>
 </body>
 </html>
