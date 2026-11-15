@@ -158,7 +158,9 @@ textarea {
         --color-gold: #e5b94f;
         --color-border: #777777;
     }
-
+    main a:hover {
+    color: #e5b94f;
+}
     header,
     footer {
         background-color: #241c29;
