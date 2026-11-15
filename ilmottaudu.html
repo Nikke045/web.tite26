@@ -15,9 +15,9 @@
 
         <nav>
             <a href="index.html">Etusivu</a>
-            <a href="ottelut.html">Ottelut</a>
+            <a href="ottelu.html">Ottelut</a>
             <a href="harjoitukset.html">Harjoitukset</a>
-            <a href="ilmoittaudu.html">Ilmoittaudu</a>
+            <a href="ilmottaudu.html">Ilmoittaudu</a>
         </nav>
     </header>
 
@@ -55,33 +55,31 @@
 
             <br><br>
 
-            <button type="submit">>Lähetä ilmoittautuminen</button>
+            <button type="submit">Lähetä ilmoittautuminen</button>
 
         </form>
-        <p id="onnistumisViesti" style="display: none;">
-        Ilmoittautuminen onnistui!
-        </p>
+       <div id="onnistumisViesti" style="display: none;">
+    <h2>Ilmoittautuminen onnistui!</h2>
+    <p>Kiitos ilmoittautumisestasi. Tervetuloa mukaan!</p>
+    </div>
     </main>
 
     <footer>
         <p>Lapuan Lepakot ry</p>
     </footer>
     <script>
+    const lomake = document.getElementById("ilmoittautumisLomake");
+    const viesti = document.getElementById("onnistumisViesti");
 
-        const lomake = document.getElementById("ilmoittautumisLomake");
+    lomake.addEventListener("submit", function(event) {
 
-        const viesti = document.getElementById("onnistumisViesti");
+    event.preventDefault();
 
-        lomake.addEventListener("submit", function(event) {
+    lomake.style.display = "none";
 
-        event.preventDefault();
+    viesti.style.display = "block";
 
-        lomake.style.display = "none";
-
-        viesti.style.display = "block";
-
-    });
-
+});
 </script>
 </body>
 </html>
