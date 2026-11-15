@@ -97,7 +97,7 @@ main a {
 }
 
 main a:hover {
-    color: var(--color-gold);
+    color: #806000;
 }
 
 /* Registration form */
