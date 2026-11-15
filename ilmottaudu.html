@@ -58,7 +58,7 @@
             <button type="submit">Lähetä ilmoittautuminen</button>
 
         </form>
-       <div id="onnistumisViesti" style="display: none;">
+       <div id="onnistumisViesti" class="hidden">
     <h2>Ilmoittautuminen onnistui!</h2>
     <p>Kiitos ilmoittautumisestasi. Tervetuloa mukaan!</p>
     </div>
@@ -75,9 +75,9 @@
 
     event.preventDefault();
 
-    lomake.style.display = "none";
+    viesti.classList.add("hidden");
 
-    viesti.style.display = "block";
+    viesti.classList.remove("hidden");
 
 });
 </script>

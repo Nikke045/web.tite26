@@ -1,73 +1,131 @@
+/* Design settings */
+:root {
+    /* Colors */
+    --color-plum: #301934;
+    --color-white: #ffffff;
+    --color-background: #f8f5fa;
+    --color-gold: #c9971a;
+    --color-border: #cccccc;
+
+    /* Fonts */
+    --font-main: Arial, sans-serif;
+
+    /* Spacing */
+    --spacing-small: 10px;
+    --spacing-medium: 20px;
+    --spacing-large: 40px;
+}
+
+/* General settings */
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f8f5fa;
-    color: #301934;
+    font-family: var(--font-main);
+    background-color: var(--color-background);
+    color: var(--color-plum);
 }
+
+/* Header */
 header {
-    background-color: #301934;
-    color: white;
+    background-color: var(--color-plum);
+    color: var(--color-white);
     padding: 25px;
     text-align: center;
 }
+
+/* Navigation */
 nav {
-    margin-top: 20px;
+    margin-top: var(--spacing-medium);
 }
+
 nav a {
-    color:white;
+    color: var(--color-white);
     text-decoration: none;
     margin: 15px;
 }
-nav a:hover {
-    color: #c9971a;
-}
-h2, h3 {
-    color:#301934;
-}
-footer {
-    background-color: #301934;
-    color: white;
-    text-align: center;
-    padding: 15px;
-}
-/* Golden accents */
 
 nav a:hover {
-    color: #c9971a;
+    color: var(--color-gold);
+}
+
+/* Headings */
+h2, h3 {
+    color: var(--color-plum);
 }
 
 h2 {
-    border-bottom: 2px solid #c9971a;
-    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-gold);
+    padding-bottom: var(--spacing-small);
 }
 
+/* Main content */
+main {
+    max-width: 1000px;
+    margin: auto;
+    padding: var(--spacing-large) var(--spacing-medium);
+    min-height: 60vh;
+    line-height: 1.6;
+}
+
+/* Footer */
+footer {
+    background-color: var(--color-plum);
+    color: var(--color-white);
+    text-align: center;
+    padding: 15px;
+}
+
+/* Buttons */
 button {
-    background-color: #301934;
-    color: white;
-    border: 2px solid #c9971a;
+    background-color: var(--color-plum);
+    color: var(--color-white);
+    border: 2px solid var(--color-gold);
     padding: 12px 25px;
     border-radius: 6px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #c9971a;
-    color: #301934;
+    background-color: var(--color-gold);
+    color: var(--color-plum);
 }
 
+/* Links */
 main a {
-    color: #301934;
+    color: var(--color-plum);
     text-decoration: none;
-    border-bottom: 2px solid #c9971a;
+    border-bottom: 2px solid var(--color-gold);
 }
 
 main a:hover {
-    color: #c9971a;
+    color: var(--color-gold);
 }
+
+/* Registration form */
+form {
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: var(--color-white);
+    border-radius: 10px;
+    border: 1px solid var(--color-gold);
+    text-align: left;
+}
+
+input, textarea {
+    width: 100%;
+    padding: var(--spacing-small);
+    margin-top: 5px;
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+textarea {
+    min-height: 100px;
+}
+
 /* Mobile responsiveness */
-
 @media (max-width: 600px) {
-
     header {
         padding: 15px;
     }
@@ -83,40 +141,79 @@ main a:hover {
     }
 
     main {
-        padding: 20px;
+        padding: var(--spacing-medium);
+    }
+    
+    input, textarea {
+        max-width: 100%;
+    }
+}
+/* Automatic dark mode */
+@media (prefers-color-scheme: dark) {
+
+    :root {
+        --color-background: #18121c;
+        --color-plum: #e5d5ed;
+        --color-white: #241c29;
+        --color-gold: #e5b94f;
+        --color-border: #777777;
+    }
+
+    header,
+    footer {
+        background-color: #241c29;
+        color: #ffffff;
+    }
+
+    h2, h3 {
+        color: #ffffff;
+    }
+
+    button {
+        background-color: #e5b94f;
+        color: #18121c;
+    }
+
+    button:hover {
+        background-color: #ffffff;
+        color: #18121c;
+    }
+
+    main a {
+        color: #ffffff;
+    }
+
+    form {
+        background-color: #241c29;
+        color: #ffffff;
     }
 
     input, textarea {
-        max-width: 90%;
+        background-color: #352b3b;
+        color: #ffffff;
+        border-color: #777777;
+    }
+    nav a {
+    color: #ffffff;
     }
 
+    nav a:hover {
+    color: #e5b94f;
 }
-form {
-    max-width: 400px;
-    margin: 30px auto;
-    padding: 25px;
-    background-color: white;
-    border-radius: 10px;
-    border: 1px solid #c9971a;
-    text-align: left;
+button {
+    background-color: #e5b94f;
+    color: #18121c;
 }
-
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
 }
-
-textarea {
-    min-height: 100px;
+/* Hide elements until they are needed */
+.hidden {
+    display: none;
 }
-main {
-    max-width: 1000px;
-    margin: auto;
-    padding: 40px 20px;
-    min-height: 60vh;
-    line-height: 1.6;
+/* Keyboard focus */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 4px;
 }
