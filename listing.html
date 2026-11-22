@@ -7,52 +7,81 @@
     <title>Ottelut - Lapuan Lepakot</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <header>
-        <h1>Lapuan Lepakot</h1>
+   <header>
+    <h1>Lapuan Lepakot</h1>
 
-        <nav>
-            <a href="index.html">Etusivu</a>
-            <a href="listing.html">Ottelut</a>
-            <a href="contact.html">Harjoitukset</a>
+    <nav>
+        <button popovertarget="pikaValikko">
+            Pikavalikko
+        </button>
+
+        <div id="pikaValikko" popover>
+            <h3>Pikavalikko</h3>
+            <a href="index.html">Etusivu</a><br>
+            <a href="listing.html">Ottelut</a><br>
+            <a href="contact.html">Harjoitukset</a><br>
             <a href="about.html">Ilmoittaudu</a>
-        </nav>
-    </header>
+        </div>
+    </nav>
+</header>
 
     <main>
-        <h2>Ottelut</h2>
+       <h2>Ottelut</h2>
 
-        <p>Täältä löydät Lapuan Lepakoiden tulevat ottelut
-            sekä aikaisempien otteluiden tulokset.</p>
+<p>
+    Täältä löydät Lapuan Lepakoiden tulevat ottelut
+    sekä aikaisempien otteluiden tulokset.
+</p>
 
-        <h3>Tulevat ottelut
-        </h3>
-        <p>
-        Lepakot vastaan Karhut UUSINTA OTTELU
-        </p>
+<h3>Tulevat ottelut</h3>
 
-        <h3>Aikaisemmat ottelut
-        </h3>
-        <p>
-        Lepakot 0 Karhut 1
-        </p>
-        <p>
-        Lepakot 1 Kissat 0
-        </p>
-        <p>
-        Lepakot 1 Ampiaiset 0
-        </p>
-        <p>
-        Lepakot 1 Koirat 0
-        </p>
+<p>Lepakot vastaan Karhut – UUSINTA OTTELU</p>
 
-        <h4>Otteluiden tulokset julkaistaan täällä.
-        </h4>
-        <p>
-        Lepakot 3 voittoa 1 häviö
-        </p>
+<h3>Aikaisemmat ottelut</h3>
+
+<label for="otteluHaku">Etsi ottelua:</label>
+<input
+    type="search"
+    id="otteluHaku"
+    placeholder="Kirjoita joukkueen nimi..."
+>
+
+<p id="tulosMaara" role="status" aria-live="polite">
+    Näytetään 4 ottelua.
+</p>
+
+<table>
+    <caption>Lapuan Lepakoiden aikaisempien otteluiden tulokset</caption>
+    <thead>
+        <tr>
+            <th scope="col">Ottelu</th>
+            <th scope="col">Tulos</th>
+        </tr>
+    </thead>
+    <tbody id="otteluLista">
+        <tr>
+            <td>Lepakot – Karhut</td>
+            <td>0–1</td>
+        </tr>
+        <tr>
+            <td>Lepakot – Kissat</td>
+            <td>1–0</td>
+        </tr>
+        <tr>
+            <td>Lepakot – Ampiaiset</td>
+            <td>1–0</td>
+        </tr>
+        <tr>
+            <td>Lepakot – Koirat</td>
+            <td>1–0</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>Otteluiden yhteenveto</h4>
+<p>Lepakot: 3 voittoa, 1 häviö.</p>
     </main>
 
     <footer>
@@ -60,4 +89,29 @@
     </footer>
 
 </body>
+<script>
+const haku = document.getElementById("otteluHaku");
+const lista = document.getElementById("otteluLista");
+const maara = document.getElementById("tulosMaara");
+
+haku.addEventListener("input", function() {
+    const hakusana = haku.value.toLowerCase();
+    const ottelut = lista.querySelectorAll("tr");
+
+    let naytettavat = 0;
+
+    ottelut.forEach(function(ottelu) {
+        const teksti = ottelu.textContent.toLowerCase();
+
+        if (teksti.includes(hakusana)) {
+            ottelu.style.display = "";
+            naytettavat++;
+        } else {
+            ottelu.style.display = "none";
+        }
+    });
+
+    maara.textContent = "Näytetään " + naytettavat + " ottelua.";
+});
+</script>
 </html>

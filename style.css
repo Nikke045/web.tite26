@@ -211,6 +211,12 @@ button {
 .hidden {
     display: none;
 }
+
+.error {
+    color: #ff7777;
+    font-size: 14px;
+}
+
 /* Keyboard focus */
 a:focus-visible,
 button:focus-visible,
@@ -218,4 +224,30 @@ input:focus-visible,
 textarea:focus-visible {
     outline: 3px solid var(--color-gold);
     outline-offset: 4px;
+}
+/* Pikavalikko */
+#pikaValikko {
+    background-color: #301934;
+    color: white;
+    border: 2px solid #c9971a;
+    border-radius: 8px;
+    padding: 20px;
+    min-width: 180px;
+    text-align: center;
+}
+
+#pikaValikko a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 6px;
+}
+
+#pikaValikko a:hover {
+    color: #c9971a;
+}
+
+#pikaValikko h3 {
+    color: white;
+    margin-top: 0;
 }

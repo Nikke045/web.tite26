@@ -27,40 +27,40 @@
         <p>Täytä alla oleva lomake, jos haluat
             osallistua ilmaiseen kokeiluharjoitukseen.</p>
 
-        <form id="ilmoittautumisLomake">
+        <form id="ilmoittautumisLomake" novalidate>
 
-            <label for="nimi">Nimi:</label>
-            <br>
-            <input type="text" id="nimi" name="nimi" required>
+         <label for="nimi">Nimi:</label>
+    <br>
+    <input type="text" id="nimi" name="nimi"
+        aria-describedby="nimiVirhe">
+    <p id="nimiVirhe" class="error" aria-live="polite"></p>
 
-            <br><br>
+    <label for="sahkoposti">Sähköposti:</label>
+    <br>
+    <input type="email" id="sahkoposti" name="sahkoposti"
+        aria-describedby="sahkopostiVirhe">
+    <p id="sahkopostiVirhe" class="error" aria-live="polite"></p>
 
-            <label for="sahkoposti">Sähköposti:</label>
-            <br>
-            <input type="email" id="sahkoposti"
-                name="sahkoposti" required>
+    <label for="ika">Ikä:</label>
+    <br>
+    <input type="number" id="ika" name="ika"
+        min="1" aria-describedby="ikaVirhe">
+    <p id="ikaVirhe" class="error" aria-live="polite"></p>
 
-            <br><br>
+    <label for="viesti">Lisätietoja:</label>
+    <br>
+    <textarea id="viesti" name="viesti"
+        aria-describedby="viestiVirhe"></textarea>
+    <p id="viestiVirhe" class="error" aria-live="polite"></p>
 
-            <label for="ika">Ikä:</label>
-            <br>
-            <input type="number" id="ika" name="ika"
-                min="1" required>
+    <button type="submit">Lähetä ilmoittautuminen</button>
 
-            <br><br>
-
-            <label for="viesti">Lisätietoja:</label>
-            <br>
-            <textarea id="viesti" name="viesti"></textarea>
-
-            <br><br>
-
-            <button type="submit">Lähetä ilmoittautuminen</button>
-
-        </form>
-       <div id="onnistumisViesti" class="hidden">
-    <h2>Ilmoittautuminen onnistui!</h2>
-    <p>Kiitos ilmoittautumisestasi. Tervetuloa mukaan!</p>
+    </form>
+       <div id="onnistumisViesti" class="hidden" role="status">
+    <p>
+    Ilmoittautumistietosi tallennettiin tähän selaimeen.
+    Tietoja ei lähetetty palvelimelle.
+</p>
     </div>
     </main>
 
@@ -68,17 +68,70 @@
         <p>Lapuan Lepakot ry</p>
     </footer>
     <script>
-    const lomake = document.getElementById("ilmoittautumisLomake");
-    const viesti = document.getElementById("onnistumisViesti");
+   const lomake = document.getElementById("ilmoittautumisLomake");
+const viesti = document.getElementById("onnistumisViesti");
 
-    lomake.addEventListener("submit", function(event) {
-
+lomake.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    viesti.classList.add("hidden");
+    const kentat = [
+        {
+            input: document.getElementById("nimi"),
+            virhe: document.getElementById("nimiVirhe"),
+            teksti: "Kirjoita nimesi."
+        },
+        {
+            input: document.getElementById("sahkoposti"),
+            virhe: document.getElementById("sahkopostiVirhe"),
+            teksti: "Kirjoita kelvollinen sähköpostiosoite."
+        },
+        {
+            input: document.getElementById("ika"),
+            virhe: document.getElementById("ikaVirhe"),
+            teksti: "Anna kelvollinen ikä."
+        }
+    ];
 
-    viesti.classList.remove("hidden");
+    let ensimmainenVirhe = null;
 
+    kentat.forEach(function(kentta) {
+        kentta.virhe.textContent = "";
+        kentta.input.removeAttribute("aria-invalid");
+
+        let virheellinen = false;
+
+        if (kentta.input.value.trim() === "") {
+            virheellinen = true;
+        } else if (!kentta.input.checkValidity()) {
+            virheellinen = true;
+        }
+
+        if (virheellinen) {
+            kentta.virhe.textContent = kentta.teksti;
+            kentta.input.setAttribute("aria-invalid", "true");
+
+            if (!ensimmainenVirhe) {
+                ensimmainenVirhe = kentta.input;
+            }
+        }
+    });
+
+    if (ensimmainenVirhe) {
+        ensimmainenVirhe.focus();
+        return;
+    }
+
+    const tiedot = {
+        nimi: document.getElementById("nimi").value,
+        sahkoposti: document.getElementById("sahkoposti").value,
+        ika: document.getElementById("ika").value,
+        viesti: document.getElementById("viesti").value
+    };
+
+    localStorage.setItem("ilmoittautuminen", JSON.stringify(tiedot));
+
+   lomake.classList.add("hidden");
+   viesti.classList.remove("hidden");
 });
 </script>
 </body>
